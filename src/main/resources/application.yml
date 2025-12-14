@@ -1,10 +1,13 @@
 spring:
   application:
     name: photography-school
+
   datasource:
     url: jdbc:postgresql://localhost:5432/photography_school
     username: postgres
     password: postgres
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -12,15 +15,25 @@ spring:
       hibernate:
         format_sql: true
     show-sql: false
+
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
 
+# ВАЖНО: Правильные настройки актуатора
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info # Какие эндпоинты включить
+      base-path: /actuator  # Это путь по умолчанию
   endpoint:
     health:
+      enabled: true
       show-details: when_authorized
+    info:
+      enabled: true
+
+# Временно отключаем security для актуатора
+  security:
+    enabled: false
