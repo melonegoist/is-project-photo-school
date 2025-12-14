@@ -1,12 +1,12 @@
 package edu.photo_school.user.service;
 
+import edu.photo_school.common.exception.BusinessException;
 import edu.photo_school.user.domain.Role;
 import edu.photo_school.user.domain.User;
 import edu.photo_school.user.dto.CreateUserRequest;
 import edu.photo_school.user.dto.UserResponse;
 import edu.photo_school.user.repository.RoleRepository;
 import edu.photo_school.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,17 +16,27 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Transactional
     public UserResponse createUser(CreateUserRequest request) {
+        return toResponse(createUserEntity(request));
+    }
+
+    @Transactional
+    public User createUserEntity(CreateUserRequest request) {
         if (userRepository.existsByEmail(request.email())) {
-            throw new BusinessException("User with email " + request.email() + " already exists");
+            throw new BusinessException("User with email already exists");
         }
 
         User user = new User();
@@ -41,13 +51,12 @@ public class UserService {
 
         Set<Role> roles = roleNames.stream()
                 .map(roleName -> roleRepository.findByName(roleName)
-                        .orElseGet(() -> roleRepository.save(new Role(roleName, "Auto-generated role"))))
+                        .orElseGet(() -> roleRepository.save(new Role(roleName, "Auto-created role"))))
                 .collect(Collectors.toSet());
 
         user.setRoles(roles);
-        User saved = userRepository.save(user);
 
-        return toResponse(saved);
+        return userRepository.save(user);
     }
 
     @Transactional(readOnly = true)
@@ -71,5 +80,4 @@ public class UserService {
                 roleNames
         );
     }
-
 }
