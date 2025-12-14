@@ -1,0 +1,57 @@
+<section class="section-card">
+  <header class="section-head">
+    <h2>Новый курс</h2>
+    <p>Создание курса с форматом и преподавателем</p>
+  </header>
+  <form class="form-grid" (ngSubmit)="createCourse()">
+    <label>
+      Название
+      <input type="text" name="title" [(ngModel)]="courseForm.title" required>
+    </label>
+    <label>
+      Описание
+      <textarea name="description" [(ngModel)]="courseForm.description" required></textarea>
+    </label>
+    <label>
+      Формат
+      <select name="format" [(ngModel)]="courseForm.format">
+        <option value="ONLINE">ONLINE</option>
+        <option value="OFFLINE">OFFLINE</option>
+        <option value="HYBRID">HYBRID</option>
+      </select>
+    </label>
+    <label>
+      ID преподавателя
+      <input type="text" name="teacherId" [(ngModel)]="courseForm.teacherId" placeholder="UUID">
+    </label>
+    <button class="button-primary" type="submit">Создать</button>
+  </form>
+  <p *ngIf="message" class="status-positive">{{ message }}</p>
+  <p *ngIf="error" class="status-negative">{{ error }}</p>
+</section>
+
+<section class="section-card">
+  <header class="section-head">
+    <h2>Опубликованные курсы</h2>
+    <p>Список из /api/v1/courses/published</p>
+  </header>
+  <div *ngIf="loading">Загрузка...</div>
+  <div class="course-grid">
+    <div class="course-card" *ngFor="let course of courses">
+      <div class="course-head">
+        <div>
+          <span class="badge">{{ course.format }}</span>
+          <span class="tag" [class.status-positive]="course.published">{{ course.published ? 'Опубликован' : 'Черновик' }}</span>
+        </div>
+        <div class="actions">
+          <button class="button-outline" type="button" [routerLink]="['/courses', course.id]">Открыть</button>
+          <button class="button-outline" type="button" (click)="publish(course)" *ngIf="!course.published">Опубликовать</button>
+          <button class="button-outline" type="button" (click)="unpublish(course)" *ngIf="course.published">Снять с публикации</button>
+        </div>
+      </div>
+      <h3>{{ course.title }}</h3>
+      <p>{{ course.description }}</p>
+      <p class="modules">Модулей: {{ course.modules?.length || 0 }}</p>
+    </div>
+  </div>
+</section>
