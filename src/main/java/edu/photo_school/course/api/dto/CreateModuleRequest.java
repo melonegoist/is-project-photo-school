@@ -11,5 +11,6 @@ public record CreateModuleRequest(
 
         @NotNull
         Integer orderIndex
-) {}
+) {
+}
 

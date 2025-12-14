@@ -5,7 +5,6 @@ import edu.photo_school.course.api.dto.CreateModuleRequest;
 import edu.photo_school.course.application.CourseModuleService;
 import edu.photo_school.course.domain.CourseModule;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
