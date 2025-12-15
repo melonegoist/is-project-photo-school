@@ -4,7 +4,7 @@
     <p>Фильтрация по преподавателю и диапазону дат</p>
   </header>
   <form class="form-grid" (ngSubmit)="loadAvailable()">
-    <label>Преподаватель (UUID)
+    <label>Преподаватель (ID)
       <input name="teacherId" [(ngModel)]="filter.teacherId" required>
     </label>
     <label>Дата от
@@ -20,13 +20,12 @@
 <section class="section-card">
   <header class="section-head">
     <h2>Создать слот</h2>
-    <p>POST /api/v1/schedule/slots</p>
   </header>
   <form class="form-grid" (ngSubmit)="createSlot()">
     <label>Преподаватель <input name="slotTeacher" [(ngModel)]="slotForm.teacherId" required></label>
     <label>Начало <input type="datetime-local" name="slotStart" [(ngModel)]="slotForm.startTime" required></label>
     <label>Конец <input type="datetime-local" name="slotEnd" [(ngModel)]="slotForm.endTime" required></label>
-    <label>UUID урока <input name="slotLesson" [(ngModel)]="slotForm.lessonId"></label>
+    <label>ID урока <input name="slotLesson" [(ngModel)]="slotForm.lessonId"></label>
     <label>Макс. студентов <input type="number" name="slotMax" [(ngModel)]="slotForm.maxStudents"></label>
     <label>Стоимость <input type="number" name="slotPrice" [(ngModel)]="slotForm.priceAmount"></label>
     <label>Валюта <input name="slotCurrency" [(ngModel)]="slotForm.priceCurrency"></label>
@@ -42,7 +41,7 @@
   </header>
 
   <label>Студент для бронирования
-    <input [(ngModel)]="bookingStudentId" name="bookingStudent" placeholder="UUID студента">
+    <input [(ngModel)]="bookingStudentId" name="bookingStudent" placeholder="ID студента">
   </label>
 
   <div class="slot-list">
