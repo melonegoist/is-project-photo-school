@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterLink, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +11,11 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   navLinks = [
-    { path: '/', label: 'Главная' },
-    { path: '/courses', label: 'Курсы' },
-    { path: '/schedule', label: 'Расписание' },
-    { path: '/equipment', label: 'Оборудование' },
-    { path: '/users', label: 'Пользователи' },
-    { path: '/auth', label: 'Вход/Регистрация' }
+    {path: '/', label: 'Главная'},
+    {path: '/courses', label: 'Курсы'},
+    {path: '/schedule', label: 'Расписание'},
+    {path: '/equipment', label: 'Оборудование'},
+    {path: '/users', label: 'Пользователи'},
+    {path: '/auth', label: 'Вход/Регистрация'}
   ];
 }

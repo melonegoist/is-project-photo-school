@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { Course } from '../models/models';
-import { CourseService, CreateCoursePayload } from '../services/course.service';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
+import {Course} from '../models/models';
+import {CourseService, CreateCoursePayload} from '../services/course.service';
 
 @Component({
   standalone: true,
@@ -24,7 +24,8 @@ export class CoursesComponent implements OnInit {
   message?: string;
   error?: string;
 
-  constructor(private readonly courseService: CourseService) {}
+  constructor(private readonly courseService: CourseService) {
+  }
 
   ngOnInit(): void {
     this.loadCourses();

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { EquipmentAvailabilityResponse, EquipmentBookingResponse, EquipmentResponse } from '../models/models';
-import { EquipmentService, EquipmentBookingPayload, EquipmentCreatePayload } from '../services/equipment.service';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {EquipmentAvailabilityResponse, EquipmentBookingResponse, EquipmentResponse} from '../models/models';
+import {EquipmentBookingPayload, EquipmentCreatePayload, EquipmentService} from '../services/equipment.service';
 
 @Component({
   standalone: true,
@@ -13,15 +13,16 @@ import { EquipmentService, EquipmentBookingPayload, EquipmentCreatePayload } fro
 })
 export class EquipmentComponent implements OnInit {
   equipment: EquipmentResponse[] = [];
-  equipmentForm: EquipmentCreatePayload = { name: '', description: '', status: 'AVAILABLE', hourlyRate: 0 };
-  availabilityForm = { id: 0, from: '', to: '' };
-  bookingForm: EquipmentBookingPayload & { id?: number } = { id: undefined, userId: '', startTime: '', endTime: '' };
+  equipmentForm: EquipmentCreatePayload = {name: '', description: '', status: 'AVAILABLE', hourlyRate: 0};
+  availabilityForm = {id: 0, from: '', to: ''};
+  bookingForm: EquipmentBookingPayload & { id?: number } = {id: undefined, userId: '', startTime: '', endTime: ''};
   availability?: EquipmentAvailabilityResponse;
   booking?: EquipmentBookingResponse;
   message?: string;
   error?: string;
 
-  constructor(private readonly equipmentService: EquipmentService) {}
+  constructor(private readonly equipmentService: EquipmentService) {
+  }
 
   ngOnInit(): void {
     this.load();

@@ -1,7 +1,9 @@
 <section class="section-card auth-card">
   <div class="switcher">
     <button class="button-primary" [class.secondary]="authMode !== 'login'" (click)="switchMode('login')">Вход</button>
-    <button class="button-primary" [class.secondary]="authMode !== 'register'" (click)="switchMode('register')">Регистрация</button>
+    <button class="button-primary" [class.secondary]="authMode !== 'register'" (click)="switchMode('register')">
+      Регистрация
+    </button>
   </div>
 
   <form *ngIf="authMode === 'login'" (ngSubmit)="submitLogin()" class="form-grid">

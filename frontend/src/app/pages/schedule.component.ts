@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ScheduleService, CreateSlotPayload } from '../services/schedule.service';
-import { LessonBooking, ScheduleSlot } from '../models/models';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {CreateSlotPayload, ScheduleService} from '../services/schedule.service';
+import {LessonBooking, ScheduleSlot} from '../models/models';
 
 @Component({
   standalone: true,
@@ -12,7 +12,7 @@ import { LessonBooking, ScheduleSlot } from '../models/models';
   styleUrl: './schedule.component.scss'
 })
 export class ScheduleComponent {
-  filter = { teacherId: '', from: '', to: '' };
+  filter = {teacherId: '', from: '', to: ''};
   slots: ScheduleSlot[] = [];
   bookings: LessonBooking[] = [];
   bookingStudentId = '';
@@ -28,7 +28,8 @@ export class ScheduleComponent {
   message?: string;
   error?: string;
 
-  constructor(private readonly scheduleService: ScheduleService) {}
+  constructor(private readonly scheduleService: ScheduleService) {
+  }
 
   loadAvailable(): void {
     if (!this.filter.teacherId) {
@@ -47,7 +48,11 @@ export class ScheduleComponent {
   }
 
   createSlot(): void {
-    const payload = { ...this.slotForm, startTime: this.toIso(this.slotForm.startTime), endTime: this.toIso(this.slotForm.endTime) };
+    const payload = {
+      ...this.slotForm,
+      startTime: this.toIso(this.slotForm.startTime),
+      endTime: this.toIso(this.slotForm.endTime)
+    };
     this.scheduleService.createSlot(payload).subscribe({
       next: (slot) => {
         this.slots = [...this.slots, slot];
@@ -62,7 +67,7 @@ export class ScheduleComponent {
       this.error = 'Укажите студента';
       return;
     }
-    this.scheduleService.bookSlot(slot.id, { studentId: this.bookingStudentId }).subscribe({
+    this.scheduleService.bookSlot(slot.id, {studentId: this.bookingStudentId}).subscribe({
       next: (booking) => {
         this.message = 'Бронь оформлена';
         this.loadBookings(slot.id);

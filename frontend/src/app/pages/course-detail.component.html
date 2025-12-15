@@ -33,7 +33,8 @@
           <textarea name="lessonDesc" [(ngModel)]="lessonForm.description"></textarea>
         </label>
         <label>Порядок <input type="number" name="lessonOrder" [(ngModel)]="lessonForm.orderIndex"></label>
-        <label>Длительность (мин) <input type="number" name="lessonDuration" [(ngModel)]="lessonForm.durationMinutes"></label>
+        <label>Длительность (мин) <input type="number" name="lessonDuration"
+                                         [(ngModel)]="lessonForm.durationMinutes"></label>
         <label>Видео URL <input name="lessonVideo" [(ngModel)]="lessonForm.videoUrl"></label>
         <label>Материалы URL <input name="lessonMaterials" [(ngModel)]="lessonForm.materialsUrl"></label>
         <label>Доступен в превью <input type="checkbox" name="lessonPreview" [(ngModel)]="lessonForm.isPreview"></label>

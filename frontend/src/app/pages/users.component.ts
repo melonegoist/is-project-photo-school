@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { UserService, CreateUserPayload } from '../services/user.service';
-import { UserResponse } from '../models/models';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {CreateUserPayload, UserService} from '../services/user.service';
+import {UserResponse} from '../models/models';
 
 @Component({
   standalone: true,
@@ -13,12 +13,13 @@ import { UserResponse } from '../models/models';
 })
 export class UsersComponent implements OnInit {
   users: UserResponse[] = [];
-  form: CreateUserPayload = { email: '', password: '', firstName: '', lastName: '', roles: ['STUDENT'] };
+  form: CreateUserPayload = {email: '', password: '', firstName: '', lastName: '', roles: ['STUDENT']};
   rolesInput = 'STUDENT';
   message?: string;
   error?: string;
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) {
+  }
 
   ngOnInit(): void {
     this.load();

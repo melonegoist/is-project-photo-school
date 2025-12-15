@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { Course, CourseModule, Lesson } from '../models/models';
-import { CourseService, CreateLessonPayload, CreateModulePayload } from '../services/course.service';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ActivatedRoute, RouterLink} from '@angular/router';
+import {FormsModule} from '@angular/forms';
+import {Course, CourseModule, Lesson} from '../models/models';
+import {CourseService, CreateLessonPayload, CreateModulePayload} from '../services/course.service';
 
 @Component({
   standalone: true,
@@ -15,7 +15,7 @@ import { CourseService, CreateLessonPayload, CreateModulePayload } from '../serv
 export class CourseDetailComponent implements OnInit {
   course?: Course;
   courseId!: string;
-  moduleForm: CreateModulePayload = { title: '', description: '', orderIndex: 1 };
+  moduleForm: CreateModulePayload = {title: '', description: '', orderIndex: 1};
   lessonForm: CreateLessonPayload & { moduleId?: string } = {
     title: '',
     description: '',
@@ -27,7 +27,8 @@ export class CourseDetailComponent implements OnInit {
   message?: string;
   error?: string;
 
-  constructor(private readonly route: ActivatedRoute, private readonly courseService: CourseService) {}
+  constructor(private readonly route: ActivatedRoute, private readonly courseService: CourseService) {
+  }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('id') as string;
@@ -58,7 +59,7 @@ export class CourseDetailComponent implements OnInit {
       this.error = 'Выберите модуль для урока';
       return;
     }
-    const { moduleId, ...payload } = this.lessonForm;
+    const {moduleId, ...payload} = this.lessonForm;
     this.courseService.createLesson(this.courseId, moduleId, payload).subscribe({
       next: (lesson) => {
         const target = this.course?.modules?.find((m) => m.id === moduleId);
@@ -72,7 +73,7 @@ export class CourseDetailComponent implements OnInit {
   }
 
   enroll(): void {
-    this.courseService.enroll(this.courseId, { studentId: this.enrollStudentId }).subscribe({
+    this.courseService.enroll(this.courseId, {studentId: this.enrollStudentId}).subscribe({
       next: () => (this.message = 'Студент зачислен'),
       error: () => (this.error = 'Не удалось зачислить студента')
     });

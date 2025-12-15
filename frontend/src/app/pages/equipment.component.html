@@ -36,7 +36,8 @@
     <label>До <input type="datetime-local" [(ngModel)]="availabilityForm.to" name="avTo" required></label>
     <button class="button-primary" type="submit">Проверить</button>
   </form>
-  <p *ngIf="availability">Доступность: <strong [class.status-positive]="availability.available">{{ availability.available ? 'Свободно' : 'Занято' }}</strong></p>
+  <p *ngIf="availability">Доступность: <strong
+    [class.status-positive]="availability.available">{{ availability.available ? 'Свободно' : 'Занято' }}</strong></p>
 </section>
 
 <section class="section-card">

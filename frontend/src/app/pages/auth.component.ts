@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { AuthService, LoginPayload, RegisterPayload } from '../services/auth.service';
-import { AuthResponse } from '../models/models';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {AuthService, LoginPayload, RegisterPayload} from '../services/auth.service';
+import {AuthResponse} from '../models/models';
 
 @Component({
   standalone: true,
@@ -13,8 +13,8 @@ import { AuthResponse } from '../models/models';
 })
 export class AuthComponent {
   authMode: 'login' | 'register' = 'login';
-  loginData: LoginPayload = { email: '', password: '' };
-  registerData: RegisterPayload = { email: '', password: '', firstName: '', lastName: '', roles: ['STUDENT'] };
+  loginData: LoginPayload = {email: '', password: ''};
+  registerData: RegisterPayload = {email: '', password: '', firstName: '', lastName: '', roles: ['STUDENT']};
   rolesInput = 'STUDENT';
   tokens?: AuthResponse;
   message?: string;
@@ -24,7 +24,7 @@ export class AuthComponent {
     const savedAccess = this.authService.accessToken;
     const savedRefresh = this.authService.refreshToken;
     if (savedAccess && savedRefresh) {
-      this.tokens = { accessToken: savedAccess, refreshToken: savedRefresh, tokenType: 'Bearer' };
+      this.tokens = {accessToken: savedAccess, refreshToken: savedRefresh, tokenType: 'Bearer'};
     }
   }
 
@@ -74,7 +74,7 @@ export class AuthComponent {
       this.error = 'Нет refresh токена';
       return;
     }
-    this.authService.refresh({ refreshToken }).subscribe({
+    this.authService.refresh({refreshToken}).subscribe({
       next: (tokens) => {
         this.tokens = tokens;
         this.message = 'Токен обновлен';

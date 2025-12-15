@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { AuthResponse } from '../models/models';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, tap} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {AuthResponse} from '../models/models';
 
 export interface RegisterPayload {
   email: string;
@@ -21,11 +21,12 @@ export interface RefreshPayload {
   refreshToken: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthService {
   private readonly baseUrl = `${environment.apiUrl}/auth`;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {
+  }
 
   register(payload: RegisterPayload): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/register`, payload).pipe(tap((res) => this.persistTokens(res)));

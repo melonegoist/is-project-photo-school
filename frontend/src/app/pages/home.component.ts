@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { Course } from '../models/models';
-import { CourseService } from '../services/course.service';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterLink} from '@angular/router';
+import {Course} from '../models/models';
+import {CourseService} from '../services/course.service';
 
 @Component({
   standalone: true,
@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit {
   loading = false;
   error?: string;
 
-  constructor(private readonly courseService: CourseService) {}
+  constructor(private readonly courseService: CourseService) {
+  }
 
   ngOnInit(): void {
     this.loading = true;

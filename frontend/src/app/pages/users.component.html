@@ -18,7 +18,14 @@
     <h2>Пользователи</h2>
   </header>
   <table class="table-like">
-    <thead><tr><th>Email</th><th>Имя</th><th>Фамилия</th><th>Роли</th></tr></thead>
+    <thead>
+    <tr>
+      <th>Email</th>
+      <th>Имя</th>
+      <th>Фамилия</th>
+      <th>Роли</th>
+    </tr>
+    </thead>
     <tbody>
     <tr *ngFor="let user of users">
       <td>{{ user.email }}</td>

@@ -41,12 +41,17 @@
       <div class="course-head">
         <div>
           <span class="badge">{{ course.format }}</span>
-          <span class="tag" [class.status-positive]="course.published">{{ course.published ? 'Опубликован' : 'Черновик' }}</span>
+          <span class="tag"
+                [class.status-positive]="course.published">{{ course.published ? 'Опубликован' : 'Черновик' }}</span>
         </div>
         <div class="actions">
           <button class="button-outline" type="button" [routerLink]="['/courses', course.id]">Открыть</button>
-          <button class="button-outline" type="button" (click)="publish(course)" *ngIf="!course.published">Опубликовать</button>
-          <button class="button-outline" type="button" (click)="unpublish(course)" *ngIf="course.published">Снять с публикации</button>
+          <button class="button-outline" type="button" (click)="publish(course)" *ngIf="!course.published">
+            Опубликовать
+          </button>
+          <button class="button-outline" type="button" (click)="unpublish(course)" *ngIf="course.published">Снять с
+            публикации
+          </button>
         </div>
       </div>
       <h3>{{ course.title }}</h3>

@@ -2,7 +2,8 @@
   <div>
     <p class="eyebrow">Новый фронтенд</p>
     <h1>Управление фото-школой в едином бежевом интерфейсе</h1>
-    <p class="lead">Создавайте курсы, публикуйте уроки, бронируйте оборудование и управляйте расписанием — всё через REST API вашего бэкенда.</p>
+    <p class="lead">Создавайте курсы, публикуйте уроки, бронируйте оборудование и управляйте расписанием — всё через
+      REST API вашего бэкенда.</p>
     <div class="cta-row">
       <a class="button-primary" routerLink="/courses">К курсам</a>
       <a class="button-outline" routerLink="/auth">Войти или зарегистрироваться</a>
@@ -43,7 +44,8 @@
     <div class="course-card" *ngFor="let course of courses">
       <div class="course-head">
         <span class="badge">{{ course.format }}</span>
-        <span class="tag" [class.status-positive]="course.published">{{ course.published ? 'Опубликован' : 'Черновик' }}</span>
+        <span class="tag"
+              [class.status-positive]="course.published">{{ course.published ? 'Опубликован' : 'Черновик' }}</span>
       </div>
       <h3>{{ course.title }}</h3>
       <p>{{ course.description }}</p>
