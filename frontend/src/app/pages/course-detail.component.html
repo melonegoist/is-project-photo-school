@@ -1,0 +1,82 @@
+<a class="button-outline" routerLink="/courses">← Вернуться к курсам</a>
+
+<section class="section-card" *ngIf="course">
+  <header class="section-head">
+    <h2>{{ course.title }}</h2>
+    <p>{{ course.description }}</p>
+    <div class="tag">Формат: {{ course.format }} · Преподаватель: {{ course.teacherId }}</div>
+  </header>
+
+  <div class="grid-two">
+    <div>
+      <h3>Добавить модуль</h3>
+      <form class="form-grid" (ngSubmit)="addModule()">
+        <label>Название <input name="modTitle" [(ngModel)]="moduleForm.title" required></label>
+        <label>Описание <textarea name="modDesc" [(ngModel)]="moduleForm.description"></textarea></label>
+        <label>Порядок <input type="number" name="modOrder" [(ngModel)]="moduleForm.orderIndex"></label>
+        <button class="button-primary" type="submit">Добавить модуль</button>
+      </form>
+    </div>
+    <div>
+      <h3>Добавить урок</h3>
+      <form class="form-grid" (ngSubmit)="addLesson()">
+        <label>Модуль
+          <select name="lessonModule" [(ngModel)]="lessonForm.moduleId" required>
+            <option [ngValue]="undefined">Выберите</option>
+            <option *ngFor="let module of course.modules" [ngValue]="module.id">{{ module.title }}</option>
+          </select>
+        </label>
+        <label>Название
+          <input name="lessonTitle" [(ngModel)]="lessonForm.title" required>
+        </label>
+        <label>Описание
+          <textarea name="lessonDesc" [(ngModel)]="lessonForm.description"></textarea>
+        </label>
+        <label>Порядок <input type="number" name="lessonOrder" [(ngModel)]="lessonForm.orderIndex"></label>
+        <label>Длительность (мин) <input type="number" name="lessonDuration"
+                                         [(ngModel)]="lessonForm.durationMinutes"></label>
+        <label>Видео URL <input name="lessonVideo" [(ngModel)]="lessonForm.videoUrl"></label>
+        <label>Материалы URL <input name="lessonMaterials" [(ngModel)]="lessonForm.materialsUrl"></label>
+        <label>Доступен в превью <input type="checkbox" name="lessonPreview" [(ngModel)]="lessonForm.isPreview"></label>
+        <button class="button-primary" type="submit">Добавить урок</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="grid-two">
+    <div>
+      <h3>Модули и уроки</h3>
+      <div class="module" *ngFor="let module of course.modules">
+        <div class="module-head">
+          <div>
+            <strong>{{ module.title }}</strong>
+            <p>{{ module.description }}</p>
+          </div>
+          <span class="badge">Порядок {{ module.orderIndex }}</span>
+        </div>
+        <div class="lessons" *ngIf="module.lessons?.length; else emptyLessons">
+          <div class="lesson" *ngFor="let lesson of module.lessons">
+            <div class="lesson-title">{{ lesson.title }}</div>
+            <div class="lesson-meta">{{ lesson.durationMinutes || 0 }} мин · {{ lesson.videoUrl || 'нет видео' }}</div>
+            <div class="tag" *ngIf="lesson.preview || lesson.isPreview">Превью</div>
+          </div>
+        </div>
+        <ng-template #emptyLessons>
+          <p class="muted">Пока нет уроков</p>
+        </ng-template>
+      </div>
+    </div>
+    <div>
+      <h3>Зачисление студента</h3>
+      <form class="form-grid" (ngSubmit)="enroll()">
+        <label>UUID студента
+          <input name="studentId" [(ngModel)]="enrollStudentId" placeholder="UUID" required>
+        </label>
+        <button class="button-primary" type="submit">Зачислить</button>
+      </form>
+    </div>
+  </div>
+
+  <p *ngIf="message" class="status-positive">{{ message }}</p>
+  <p *ngIf="error" class="status-negative">{{ error }}</p>
+</section>

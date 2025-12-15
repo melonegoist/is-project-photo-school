@@ -1,0 +1,91 @@
+<section class="section-card">
+  <header class="section-head">
+    <h2>Доступные слоты</h2>
+    <p>Фильтрация по преподавателю и диапазону дат</p>
+  </header>
+  <form class="form-grid" (ngSubmit)="loadAvailable()">
+    <label>Преподаватель (UUID)
+      <input name="teacherId" [(ngModel)]="filter.teacherId" required>
+    </label>
+    <label>Дата от
+      <input type="datetime-local" name="from" [(ngModel)]="filter.from">
+    </label>
+    <label>Дата до
+      <input type="datetime-local" name="to" [(ngModel)]="filter.to">
+    </label>
+    <button class="button-primary" type="submit">Загрузить</button>
+  </form>
+</section>
+
+<section class="section-card">
+  <header class="section-head">
+    <h2>Создать слот</h2>
+    <p>POST /api/v1/schedule/slots</p>
+  </header>
+  <form class="form-grid" (ngSubmit)="createSlot()">
+    <label>Преподаватель <input name="slotTeacher" [(ngModel)]="slotForm.teacherId" required></label>
+    <label>Начало <input type="datetime-local" name="slotStart" [(ngModel)]="slotForm.startTime" required></label>
+    <label>Конец <input type="datetime-local" name="slotEnd" [(ngModel)]="slotForm.endTime" required></label>
+    <label>UUID урока <input name="slotLesson" [(ngModel)]="slotForm.lessonId"></label>
+    <label>Макс. студентов <input type="number" name="slotMax" [(ngModel)]="slotForm.maxStudents"></label>
+    <label>Стоимость <input type="number" name="slotPrice" [(ngModel)]="slotForm.priceAmount"></label>
+    <label>Валюта <input name="slotCurrency" [(ngModel)]="slotForm.priceCurrency"></label>
+    <label>Описание <textarea name="slotDesc" [(ngModel)]="slotForm.description"></textarea></label>
+    <button class="button-primary" type="submit">Создать слот</button>
+  </form>
+</section>
+
+<section class="section-card">
+  <header class="section-head">
+    <h2>Слоты</h2>
+    <p>Бронирование и управление</p>
+  </header>
+
+  <label>Студент для бронирования
+    <input [(ngModel)]="bookingStudentId" name="bookingStudent" placeholder="UUID студента">
+  </label>
+
+  <div class="slot-list">
+    <div class="slot" *ngFor="let slot of slots">
+      <div class="slot-head">
+        <div>
+          <strong>{{ slot.startTime | date:'short' }} → {{ slot.endTime | date:'short' }}</strong>
+          <div class="muted">Учитель {{ slot.teacherId }} · {{ slot.status }}</div>
+        </div>
+        <div class="tag">{{ slot.priceAmount || 0 }} {{ slot.priceCurrency || 'USD' }}</div>
+      </div>
+      <div class="slot-meta">Макс: {{ slot.maxStudents }} · Текущих: {{ slot.currentStudents }}</div>
+      <div class="actions">
+        <button class="button-outline" type="button" (click)="book(slot)">Забронировать</button>
+        <button class="button-outline" type="button" (click)="complete(slot)">Завершить</button>
+        <button class="button-outline" type="button" (click)="cancel(slot)">Отменить</button>
+        <button class="button-outline" type="button" (click)="loadBookings(slot.id)">Брони</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="bookings.length" class="section-card inner">
+    <h3>Брони выбранного слота</h3>
+    <table class="table-like">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Студент</th>
+        <th>Статус</th>
+        <th>Создано</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let booking of bookings">
+        <td>{{ booking.id }}</td>
+        <td>{{ booking.studentId }}</td>
+        <td>{{ booking.status }}</td>
+        <td>{{ booking.createdAt | date:'short' }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="message" class="status-positive">{{ message }}</p>
+  <p *ngIf="error" class="status-negative">{{ error }}</p>
+</section>

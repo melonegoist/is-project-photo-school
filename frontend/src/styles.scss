@@ -1,0 +1,133 @@
+:root {
+  --beige-50: #f9f5ec;
+  --beige-100: #f2e8d5;
+  --beige-300: #e0c9a6;
+  --beige-500: #c7a36c;
+  --beige-700: #9c7b45;
+  --text-main: #2f2a25;
+  --accent: #4c5b5c;
+  --success: #5b8a72;
+  --danger: #b95c50;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: var(--text-main);
+  background-color: var(--beige-50);
+}
+
+body.beige-body {
+  margin: 0;
+  background: radial-gradient(circle at 10% 20%, rgba(255, 248, 236, 0.9), rgba(249, 245, 236, 0.85)),
+  linear-gradient(120deg, rgba(224, 201, 166, 0.15), rgba(255, 255, 255, 0.5));
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.section-card {
+  background: #fffaf1;
+  border: 1px solid rgba(153, 119, 74, 0.15);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(60, 42, 28, 0.08);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.button-primary {
+  background: linear-gradient(135deg, var(--beige-500), var(--beige-700));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1.2rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.button-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(156, 123, 69, 0.25);
+}
+
+.button-outline {
+  background: transparent;
+  border: 1px solid var(--beige-500);
+  color: var(--text-main);
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(156, 123, 69, 0.25);
+  background: #fff;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  display: inline-block;
+  background: var(--beige-100);
+}
+
+.table-like {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-like th, .table-like td {
+  text-align: left;
+  padding: 0.6rem 0.4rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.table-like th {
+  font-size: 0.95rem;
+  color: #6c5b45;
+  font-weight: 600;
+}
+
+.tag {
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  background: var(--beige-100);
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.status-positive {
+  color: var(--success);
+}
+
+.status-negative {
+  color: var(--danger);
+}
+
+small.field-hint {
+  color: #6b5641;
+  display: block;
+  margin-top: 0.25rem;
+}

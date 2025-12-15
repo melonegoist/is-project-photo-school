@@ -1,0 +1,22 @@
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.equipment-card {
+  border: 1px solid rgba(156, 123, 69, 0.2);
+  padding: 1rem;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.equipment-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inner {
+  background: #fff7eb;
+}

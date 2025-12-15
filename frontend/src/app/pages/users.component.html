@@ -1,0 +1,40 @@
+<section class="section-card">
+  <header class="section-head">
+    <h2>Создать пользователя</h2>
+    <p>POST /api/v1/users</p>
+  </header>
+  <form class="form-grid" (ngSubmit)="create()">
+    <label>Email <input type="email" name="uEmail" [(ngModel)]="form.email" required></label>
+    <label>Пароль <input type="password" name="uPassword" [(ngModel)]="form.password" required></label>
+    <label>Имя <input name="uFirst" [(ngModel)]="form.firstName" required></label>
+    <label>Фамилия <input name="uLast" [(ngModel)]="form.lastName" required></label>
+    <label>Роли через запятую <input name="uRoles" [(ngModel)]="rolesInput"></label>
+    <button class="button-primary" type="submit">Создать</button>
+  </form>
+</section>
+
+<section class="section-card">
+  <header class="section-head">
+    <h2>Пользователи</h2>
+  </header>
+  <table class="table-like">
+    <thead>
+    <tr>
+      <th>Email</th>
+      <th>Имя</th>
+      <th>Фамилия</th>
+      <th>Роли</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.email }}</td>
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.roles?.join(', ') }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <p *ngIf="message" class="status-positive">{{ message }}</p>
+  <p *ngIf="error" class="status-negative">{{ error }}</p>
+</section>

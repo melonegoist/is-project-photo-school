@@ -1,0 +1,26 @@
+.slot-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.slot {
+  border: 1px solid rgba(156, 123, 69, 0.15);
+  padding: 1rem;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.slot-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.slot-meta {
+  color: #6b5641;
+}
+
+.inner {
+  margin-top: 1rem;
+}

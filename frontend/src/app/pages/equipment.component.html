@@ -1,0 +1,70 @@
+<section class="section-card">
+  <header class="section-head">
+    <h2>Каталог оборудования</h2>
+    <p>Данные из /api/v1/equipment</p>
+  </header>
+  <div class="equipment-grid">
+    <div class="equipment-card" *ngFor="let item of equipment">
+      <div class="equipment-head">
+        <div>
+          <strong>{{ item.name }}</strong>
+          <p>{{ item.description }}</p>
+        </div>
+        <span class="badge">{{ item.status }}</span>
+      </div>
+      <div class="muted">Тариф: {{ item.hourlyRate }} за час</div>
+    </div>
+  </div>
+</section>
+
+<section class="section-card">
+  <h3>Создать оборудование</h3>
+  <form class="form-grid" (ngSubmit)="create()">
+    <label>Название <input [(ngModel)]="equipmentForm.name" name="eqName" required></label>
+    <label>Описание <textarea [(ngModel)]="equipmentForm.description" name="eqDesc"></textarea></label>
+    <label>Статус <input [(ngModel)]="equipmentForm.status" name="eqStatus"></label>
+    <label>Цена за час <input type="number" [(ngModel)]="equipmentForm.hourlyRate" name="eqRate"></label>
+    <button class="button-primary" type="submit">Создать</button>
+  </form>
+</section>
+
+<section class="section-card">
+  <h3>Проверка доступности</h3>
+  <form class="form-grid" (ngSubmit)="check()">
+    <label>ID оборудования <input type="number" [(ngModel)]="availabilityForm.id" name="avId" required></label>
+    <label>От <input type="datetime-local" [(ngModel)]="availabilityForm.from" name="avFrom" required></label>
+    <label>До <input type="datetime-local" [(ngModel)]="availabilityForm.to" name="avTo" required></label>
+    <button class="button-primary" type="submit">Проверить</button>
+  </form>
+  <p *ngIf="availability">Доступность: <strong
+    [class.status-positive]="availability.available">{{ availability.available ? 'Свободно' : 'Занято' }}</strong></p>
+</section>
+
+<section class="section-card">
+  <h3>Бронирование оборудования</h3>
+  <form class="form-grid" (ngSubmit)="book()">
+    <label>ID оборудования
+      <input type="number" name="bookId" [(ngModel)]="bookingForm.id" required>
+    </label>
+    <label>UUID пользователя
+      <input name="bookUser" [(ngModel)]="bookingForm.userId" required>
+    </label>
+    <label>Начало
+      <input type="datetime-local" name="bookStart" [(ngModel)]="bookingForm.startTime" required>
+    </label>
+    <label>Конец
+      <input type="datetime-local" name="bookEnd" [(ngModel)]="bookingForm.endTime" required>
+    </label>
+    <button class="button-primary" type="submit">Забронировать</button>
+  </form>
+
+  <div *ngIf="booking" class="section-card inner">
+    <h4>Бронь создана</h4>
+    <p>ID: {{ booking.id }}</p>
+    <p>Пользователь: {{ booking.userId }}</p>
+    <p>Статус: {{ booking.status }}</p>
+  </div>
+
+  <p *ngIf="message" class="status-positive">{{ message }}</p>
+  <p *ngIf="error" class="status-negative">{{ error }}</p>
+</section>
