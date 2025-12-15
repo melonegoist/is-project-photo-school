@@ -1,0 +1,71 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(90deg, rgba(231, 212, 181, 0.9), rgba(255, 252, 244, 0.9));
+  border-bottom: 1px solid rgba(156, 123, 69, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-mark {
+  background: linear-gradient(160deg, var(--beige-700), var(--beige-500));
+  color: #fff;
+  font-weight: 700;
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(156, 123, 69, 0.25);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #6b5641;
+  font-size: 0.95rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  color: #4a3b2c;
+}
+
+.nav-links a.active, .nav-links a:hover {
+  background: #fffaf1;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+.app-footer {
+  background: #fff4e5;
+  color: #624e37;
+  border-top: 1px solid rgba(156, 123, 69, 0.15);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.25rem;
+}

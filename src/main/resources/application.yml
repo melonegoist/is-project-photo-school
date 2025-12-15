@@ -1,26 +1,44 @@
 spring:
   application:
     name: photography-school
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/photography_school
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/photo_school
+    username: photo_user
+    password: photo_pass
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
+
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+
+  main:
+    allow-bean-definition-overriding: true
 
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+      base-path: /actuator  # Это путь по умолчанию
   endpoint:
     health:
+      enabled: true
       show-details: when_authorized
+    info:
+      enabled: true
+
+security:
+  jwt:
+    secret: "change-me-please-change-me-please-change-me"
+    access-token-validity-minutes: 60
+    refresh-token-validity-minutes: 43200

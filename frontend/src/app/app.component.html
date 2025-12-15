@@ -1,0 +1,20 @@
+<header class="app-header">
+  <div class="logo-block">
+    <div class="logo-mark">PS</div>
+    <div>
+      <div class="title">Фотошкола</div>
+      <div class="subtitle">панель управления курсами, расписанием и оборудованием</div>
+    </div>
+  </div>
+  <nav class="nav-links">
+    <a *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+  </nav>
+</header>
+
+<main class="page-shell">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="app-footer">
+
+</footer>

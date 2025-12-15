@@ -1,0 +1,38 @@
+.grid-two {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.module {
+  border: 1px solid rgba(156, 123, 69, 0.2);
+  padding: 1rem;
+  border-radius: 12px;
+  background: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.module-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lesson {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.lesson-title {
+  font-weight: 700;
+}
+
+.lesson-meta {
+  color: #6b5641;
+  font-size: 0.95rem;
+}
+
+.muted {
+  color: #8d7a61;
+}
