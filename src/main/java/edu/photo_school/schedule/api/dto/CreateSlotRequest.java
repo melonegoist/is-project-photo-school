@@ -28,4 +28,5 @@ public record CreateSlotRequest(
         String priceCurrency,
 
         String description
-) {}
+) {
+}

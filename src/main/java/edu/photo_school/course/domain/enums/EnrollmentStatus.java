@@ -9,14 +9,11 @@ public enum EnrollmentStatus {
 
     public boolean canTransitionTo(EnrollmentStatus target) {
         return switch (this) {
-            case PENDING ->
-                    target == CONFIRMED || target == CANCELLED;
+            case PENDING -> target == CONFIRMED || target == CANCELLED;
 
-            case CONFIRMED ->
-                    target == COMPLETED || target == CANCELLED;
+            case CONFIRMED -> target == COMPLETED || target == CANCELLED;
 
-            case COMPLETED, CANCELLED ->
-                    false;
+            case COMPLETED, CANCELLED -> false;
         };
     }
 }

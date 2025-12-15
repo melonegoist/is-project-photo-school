@@ -19,5 +19,6 @@ public record CreateLessonRequest(
         String materialsUrl,
 
         Boolean isPreview
-) {}
+) {
+}
 
