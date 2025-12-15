@@ -1,0 +1,57 @@
+<section class="section-card auth-card">
+  <div class="switcher">
+    <button class="button-primary" [class.secondary]="authMode !== 'login'" (click)="switchMode('login')">Вход</button>
+    <button class="button-primary" [class.secondary]="authMode !== 'register'" (click)="switchMode('register')">Регистрация</button>
+  </div>
+
+  <form *ngIf="authMode === 'login'" (ngSubmit)="submitLogin()" class="form-grid">
+    <label>
+      Email
+      <input type="email" [(ngModel)]="loginData.email" name="loginEmail" required>
+    </label>
+    <label>
+      Пароль
+      <input type="password" [(ngModel)]="loginData.password" name="loginPassword" required>
+    </label>
+    <button class="button-primary" type="submit">Войти</button>
+  </form>
+
+  <form *ngIf="authMode === 'register'" (ngSubmit)="submitRegister()" class="form-grid">
+    <label>
+      Email
+      <input type="email" [(ngModel)]="registerData.email" name="regEmail" required>
+    </label>
+    <label>
+      Пароль
+      <input type="password" [(ngModel)]="registerData.password" name="regPassword" required>
+      <small class="field-hint">Минимум 6 символов</small>
+    </label>
+    <label>
+      Имя
+      <input type="text" [(ngModel)]="registerData.firstName" name="regFirstName" required>
+    </label>
+    <label>
+      Фамилия
+      <input type="text" [(ngModel)]="registerData.lastName" name="regLastName" required>
+    </label>
+    <label>
+      Роли через запятую
+      <input type="text" [(ngModel)]="rolesInput" name="regRoles" placeholder="STUDENT,TEACHER">
+      <small class="field-hint">Если поле пустое, будет назначена роль STUDENT</small>
+    </label>
+    <button class="button-primary" type="submit">Создать аккаунт</button>
+  </form>
+
+  <div class="section-card inner" *ngIf="tokens">
+    <h3>Текущие токены</h3>
+    <p><strong>Access:</strong> {{ tokens.accessToken }}</p>
+    <p><strong>Refresh:</strong> {{ tokens.refreshToken }}</p>
+    <div class="actions">
+      <button class="button-outline" type="button" (click)="refresh()">Обновить</button>
+      <button class="button-outline" type="button" (click)="logout()">Выйти</button>
+    </div>
+  </div>
+
+  <p *ngIf="message" class="status-positive">{{ message }}</p>
+  <p *ngIf="error" class="status-negative">{{ error }}</p>
+</section>
