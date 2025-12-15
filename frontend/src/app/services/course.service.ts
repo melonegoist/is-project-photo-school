@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { Course, CourseModule, Lesson } from '../models/models';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {Course, CourseModule, Lesson} from '../models/models';
 
 export interface CreateCoursePayload {
   title: string;
@@ -31,11 +31,12 @@ export interface EnrollPayload {
   studentId: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class CourseService {
   private readonly baseUrl = `${environment.apiUrl}/courses`;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {
+  }
 
   getPublishedCourses(): Observable<Course[]> {
     return this.http.get<Course[]>(`${this.baseUrl}/published`);
