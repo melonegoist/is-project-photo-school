@@ -1,0 +1,58 @@
+<section class="hero section-card">
+  <div>
+    <p class="eyebrow">Новый фронтенд</p>
+    <h1>Управление фото-школой в едином бежевом интерфейсе</h1>
+    <p class="lead">Создавайте курсы, публикуйте уроки, бронируйте оборудование и управляйте расписанием — всё через REST API вашего бэкенда.</p>
+    <div class="cta-row">
+      <a class="button-primary" routerLink="/courses">К курсам</a>
+      <a class="button-outline" routerLink="/auth">Войти или зарегистрироваться</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="stat">
+      <div class="stat-value">{{ courses.length }}</div>
+      <div class="stat-label">опубликованных курсов</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">API базовый адрес</div>
+      <div class="stat-value">/api/v1</div>
+    </div>
+    <p class="note">JWT будет автоматически подставлен в заголовки, если вы вошли в систему.</p>
+  </div>
+</section>
+
+<section class="section-card">
+  <header class="section-head">
+    <h2>Быстрые переходы</h2>
+    <p>Доступ к ключевым возможностям фото-школы</p>
+  </header>
+  <div class="shortcut-grid">
+    <a routerLink="/courses" class="shortcut">Курсы и модули</a>
+    <a routerLink="/schedule" class="shortcut">Расписание и бронирования</a>
+    <a routerLink="/equipment" class="shortcut">Оборудование</a>
+    <a routerLink="/users" class="shortcut">Пользователи</a>
+  </div>
+</section>
+
+<section class="section-card" *ngIf="courses.length">
+  <header class="section-head">
+    <h2>Опубликованные курсы</h2>
+    <p>Данные получены с вашего API</p>
+  </header>
+  <div class="course-grid">
+    <div class="course-card" *ngFor="let course of courses">
+      <div class="course-head">
+        <span class="badge">{{ course.format }}</span>
+        <span class="tag" [class.status-positive]="course.published">{{ course.published ? 'Опубликован' : 'Черновик' }}</span>
+      </div>
+      <h3>{{ course.title }}</h3>
+      <p>{{ course.description }}</p>
+      <div class="modules">Модулей: {{ course.modules?.length || 0 }}</div>
+      <a class="button-outline" [routerLink]="['/courses', course.id]">Открыть</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-card" *ngIf="error">
+  <p class="status-negative">{{ error }}</p>
+</section>
