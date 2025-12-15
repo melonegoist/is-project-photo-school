@@ -5,9 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.Duration;
 import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 @Table(name = "lessons")
@@ -17,7 +15,7 @@ public class Lesson {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -50,10 +48,6 @@ public class Lesson {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    /* =====================
-       Factory method
-       ===================== */
-
     public static Lesson create(
             CourseModule module,
             String title,
@@ -82,10 +76,6 @@ public class Lesson {
 
         return lesson;
     }
-
-    /* =====================
-       Domain behavior
-       ===================== */
 
     public void updateDetails(
             String title,
@@ -130,16 +120,48 @@ public class Lesson {
         this.updatedAt = Instant.now();
     }
 
-    // Getters
-    public UUID getId() { return id; }
-    public String getTitle() { return title; }
-    public String getDescription() { return description; }
-    public String getVideoUrl() { return videoUrl; }
-    public String getMaterialsUrl() { return materialsUrl; }
-    public Integer getDurationMinutes() { return durationMinutes; }
-    public Integer getOrderIndex() { return orderIndex; }
-    public boolean isPreview() { return isPreview; }
-    public CourseModule getModule() { return module; }
-    public Instant getCreatedAt() { return createdAt; }
-    public Instant getUpdatedAt() { return updatedAt; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public String getMaterialsUrl() {
+        return materialsUrl;
+    }
+
+    public Integer getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    public Integer getOrderIndex() {
+        return orderIndex;
+    }
+
+    public boolean isPreview() {
+        return isPreview;
+    }
+
+    public CourseModule getModule() {
+        return module;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
 }

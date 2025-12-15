@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "courses")
@@ -19,7 +18,7 @@ public class Course {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -32,7 +31,7 @@ public class Course {
     private CourseFormat format;
 
     @Column(name = "teacher_id", nullable = false)
-    private UUID teacherId;
+    private Long teacherId;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("orderIndex ASC")
@@ -47,15 +46,11 @@ public class Course {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    /* =====================
-       Factory
-       ===================== */
-
     public static Course create(
             String title,
             String description,
             CourseFormat format,
-            UUID teacherId
+            Long teacherId
     ) {
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Course title must not be empty");
@@ -79,9 +74,6 @@ public class Course {
         return course;
     }
 
-    /* =====================
-       Domain behavior
-       ===================== */
 
     public void addModule(CourseModule module) {
         if (module != null && !modules.contains(module)) {
@@ -90,7 +82,7 @@ public class Course {
         }
     }
 
-    public CourseModule getModuleById(UUID moduleId) {
+    public CourseModule getModuleById(Long moduleId) {
         return modules.stream()
                 .filter(module -> module.getId().equals(moduleId))
                 .findFirst()
@@ -124,13 +116,39 @@ public class Course {
         this.updatedAt = Instant.now();
     }
 
-    public UUID getId() { return id; }
-    public String getTitle() { return title; }
-    public String getDescription() { return description; }
-    public CourseFormat getFormat() { return format; }
-    public UUID getTeacherId() { return teacherId; }
-    public boolean isPublished() { return published; }
-    public Instant getCreatedAt() { return createdAt; }
-    public Instant getUpdatedAt() { return updatedAt; }
-    public List<CourseModule> getModules() { return new ArrayList<>(modules); }
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public CourseFormat getFormat() {
+        return format;
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public List<CourseModule> getModules() {
+        return new ArrayList<>(modules);
+    }
 }

@@ -2,10 +2,8 @@ package edu.photo_school.course.api.dto;
 
 import edu.photo_school.course.domain.Lesson;
 
-import java.util.UUID;
-
 public record LessonResponse(
-        UUID id,
+        Long id,
         String title,
         String description,
         String videoUrl,
@@ -13,7 +11,7 @@ public record LessonResponse(
         Integer durationMinutes,
         Integer orderIndex,
         boolean isPreview,
-        UUID moduleId
+        Long moduleId
 ) {
     public static LessonResponse from(Lesson lesson) {
         return new LessonResponse(
@@ -28,4 +26,5 @@ public record LessonResponse(
                 lesson.getModule().getId()
         );
     }
+
 }

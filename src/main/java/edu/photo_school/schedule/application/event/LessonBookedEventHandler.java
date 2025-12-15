@@ -2,25 +2,17 @@ package edu.photo_school.schedule.application.event;
 
 import edu.photo_school.schedule.domain.events.LessonBookedEvent;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class LessonBookedEventHandler {
 
     private static final Logger log = LoggerFactory.getLogger(LessonBookedEventHandler.class);
-
-    // В реальном приложении здесь была бы интеграция с email сервисом, SMS и т.д.
-    // private final EmailService emailService;
-    // private final NotificationService notificationService;
 
     @Async
     @EventListener
@@ -40,15 +32,16 @@ public class LessonBookedEventHandler {
         }
     }
 
-    private void sendStudentNotification(UUID studentId, UUID bookingId) {
+    private void sendStudentNotification(Long studentId, Long bookingId) {
         // Заглушка для реальной реализации
         log.info("Sending notification to student {} about booking {}", studentId, bookingId);
         // emailService.send(studentEmail, "Booking Confirmed", "Your lesson has been booked");
     }
 
-    private void sendTeacherNotification(UUID slotId, UUID bookingId) {
+    private void sendTeacherNotification(Long slotId, Long bookingId) {
         // Заглушка для реальной реализации
         log.info("Sending notification to teacher about slot {} and booking {}", slotId, bookingId);
         // emailService.send(teacherEmail, "New Booking", "A student has booked your slot");
     }
+
 }

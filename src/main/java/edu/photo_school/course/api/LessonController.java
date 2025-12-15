@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/courses/{courseId}/modules/{moduleId}/lessons")
@@ -17,7 +16,6 @@ public class LessonController {
 
     private final LessonService lessonService;
 
-    // Явный конструктор для совместимости
     public LessonController(LessonService lessonService) {
         this.lessonService = lessonService;
     }
@@ -25,8 +23,8 @@ public class LessonController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LessonResponse createLesson(
-            @PathVariable UUID courseId,
-            @PathVariable UUID moduleId,
+            @PathVariable Long courseId,
+            @PathVariable Long moduleId,
             @RequestBody @Valid CreateLessonRequest request
     ) {
         Lesson lesson = lessonService.createLesson(
@@ -44,8 +42,8 @@ public class LessonController {
 
     @GetMapping
     public List<LessonResponse> getLessons(
-            @PathVariable UUID courseId,
-            @PathVariable UUID moduleId
+            @PathVariable Long courseId,
+            @PathVariable Long moduleId
     ) {
         return lessonService.getLessonsByModuleId(moduleId)
                 .stream()
@@ -55,9 +53,9 @@ public class LessonController {
 
     @GetMapping("/{lessonId}")
     public LessonResponse getLesson(
-            @PathVariable UUID courseId,
-            @PathVariable UUID moduleId,
-            @PathVariable UUID lessonId
+            @PathVariable Long courseId,
+            @PathVariable Long moduleId,
+            @PathVariable Long lessonId
     ) {
         return LessonResponse.from(
                 lessonService.getLessonById(lessonId)
@@ -65,7 +63,7 @@ public class LessonController {
     }
 
     @GetMapping("/preview")
-    public List<LessonResponse> getPreviewLessons(@PathVariable UUID courseId) {
+    public List<LessonResponse> getPreviewLessons(@PathVariable Long courseId) {
         return lessonService.getPreviewLessonsByCourseId(courseId)
                 .stream()
                 .map(LessonResponse::from)
@@ -74,9 +72,9 @@ public class LessonController {
 
     @PutMapping("/{lessonId}")
     public LessonResponse updateLesson(
-            @PathVariable UUID courseId,
-            @PathVariable UUID moduleId,
-            @PathVariable UUID lessonId,
+            @PathVariable Long courseId,
+            @PathVariable Long moduleId,
+            @PathVariable Long lessonId,
             @RequestBody @Valid CreateLessonRequest request
     ) {
         Lesson lesson = lessonService.updateLesson(
@@ -95,10 +93,11 @@ public class LessonController {
     @DeleteMapping("/{lessonId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteLesson(
-            @PathVariable UUID courseId,
-            @PathVariable UUID moduleId,
-            @PathVariable UUID lessonId
+            @PathVariable Long courseId,
+            @PathVariable Long moduleId,
+            @PathVariable Long lessonId
     ) {
         lessonService.deleteLesson(lessonId);
     }
+
 }

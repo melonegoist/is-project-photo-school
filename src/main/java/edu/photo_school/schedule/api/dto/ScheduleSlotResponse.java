@@ -4,15 +4,14 @@ import edu.photo_school.schedule.domain.ScheduleSlot;
 import edu.photo_school.schedule.domain.enums.SlotStatus;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public record ScheduleSlotResponse(
-        UUID id,
-        UUID teacherId,
+        Long id,
+        Long teacherId,
         LocalDateTime startTime,
         LocalDateTime endTime,
         SlotStatus status,
-        UUID lessonId,
+        Long lessonId,
         Integer maxStudents,
         Integer currentStudents,
         Double priceAmount,

@@ -3,8 +3,6 @@ package edu.photo_school.schedule.application;
 import edu.photo_school.schedule.domain.ScheduleSlot;
 import edu.photo_school.schedule.infrastructure.repository.ScheduleSlotRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
-@Slf4j
 @Service
 public class ScheduleSlotService {
 
@@ -28,10 +24,10 @@ public class ScheduleSlotService {
 
     @Transactional
     public ScheduleSlot createSlot(
-            UUID teacherId,
+            Long teacherId,
             LocalDateTime startTime,
             LocalDateTime endTime,
-            UUID lessonId,
+            Long lessonId,
             Integer maxStudents,
             Double priceAmount,
             String priceCurrency,
@@ -57,7 +53,7 @@ public class ScheduleSlotService {
 
     @Transactional(readOnly = true)
     public List<ScheduleSlot> getAvailableSlots(
-            UUID teacherId,
+            Long teacherId,
             LocalDateTime from,
             LocalDateTime to
     ) {
@@ -66,7 +62,7 @@ public class ScheduleSlotService {
         }
 
         if (to == null) {
-            to = from.plusWeeks(2); // По умолчанию показываем 2 недели вперед
+            to = from.plusWeeks(2);
         }
 
         return scheduleSlotRepository.findAvailableSlotsByTeacherIdAndTimeRange(
@@ -75,13 +71,13 @@ public class ScheduleSlotService {
     }
 
     @Transactional(readOnly = true)
-    public ScheduleSlot getSlotById(UUID slotId) {
+    public ScheduleSlot getSlotById(Long slotId) {
         return scheduleSlotRepository.findById(slotId)
                 .orElseThrow(() -> new EntityNotFoundException("Schedule slot not found"));
     }
 
     @Transactional(readOnly = true)
-    public List<ScheduleSlot> getSlotsByTeacher(UUID teacherId, LocalDateTime from, LocalDateTime to) {
+    public List<ScheduleSlot> getSlotsByTeacher(Long teacherId, LocalDateTime from, LocalDateTime to) {
         if (from == null && to == null) {
             return scheduleSlotRepository.findByTeacherIdAndStartTimeAfter(teacherId, LocalDateTime.now());
         }
@@ -90,7 +86,7 @@ public class ScheduleSlotService {
     }
 
     @Transactional
-    public void cancelSlot(UUID slotId, UUID teacherId) {
+    public void cancelSlot(Long slotId, Long teacherId) {
         ScheduleSlot slot = scheduleSlotRepository.findByIdAndTeacherId(slotId, teacherId)
                 .orElseThrow(() -> new EntityNotFoundException("Schedule slot not found or access denied"));
 
@@ -101,7 +97,7 @@ public class ScheduleSlotService {
     }
 
     @Transactional
-    public void completeSlot(UUID slotId, UUID teacherId) {
+    public void completeSlot(Long slotId, Long teacherId) {
         ScheduleSlot slot = scheduleSlotRepository.findByIdAndTeacherId(slotId, teacherId)
                 .orElseThrow(() -> new EntityNotFoundException("Schedule slot not found or access denied"));
 

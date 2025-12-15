@@ -5,11 +5,8 @@ import edu.photo_school.course.domain.Enrollment;
 import edu.photo_school.course.domain.enums.EnrollmentStatus;
 import edu.photo_school.course.infrastructure.repository.EnrollmentRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
 
 @Service
 public class EnrollmentService {
@@ -24,7 +21,7 @@ public class EnrollmentService {
     }
 
     @Transactional
-    public Enrollment enrollStudent(UUID courseId, UUID studentId) {
+    public Enrollment enrollStudent(Long courseId, Long studentId) {
         Course course = courseService.getPublishedCourseById(courseId);
 
         if (!course.isAvailableForEnrollment()) {
@@ -40,7 +37,7 @@ public class EnrollmentService {
     }
 
     @Transactional
-    public Enrollment changeStatus(UUID enrollmentId, EnrollmentStatus newStatus) {
+    public Enrollment changeStatus(Long enrollmentId, EnrollmentStatus newStatus) {
         Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
                 .orElseThrow(() -> new EntityNotFoundException("Enrollment not found"));
 
@@ -49,8 +46,9 @@ public class EnrollmentService {
     }
 
     @Transactional(readOnly = true)
-    public Enrollment getEnrollment(UUID courseId, UUID studentId) {
+    public Enrollment getEnrollment(Long courseId, Long studentId) {
         return enrollmentRepository.findByCourseIdAndStudentId(courseId, studentId)
                 .orElseThrow(() -> new EntityNotFoundException("Enrollment not found"));
     }
+
 }

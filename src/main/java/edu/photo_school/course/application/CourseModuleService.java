@@ -4,12 +4,10 @@ import edu.photo_school.course.domain.Course;
 import edu.photo_school.course.domain.CourseModule;
 import edu.photo_school.course.infrastructure.repository.CourseModuleRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class CourseModuleService {
@@ -24,7 +22,7 @@ public class CourseModuleService {
     }
 
     @Transactional
-    public CourseModule createModule(UUID courseId, String title, String description, Integer orderIndex) {
+    public CourseModule createModule(Long courseId, String title, String description, Integer orderIndex) {
         Course course = courseService.getCourseById(courseId);
 
         CourseModule module = CourseModule.create(course, title, description, orderIndex);
@@ -35,7 +33,7 @@ public class CourseModuleService {
 
     @Transactional
     public CourseModule updateModule(
-            UUID moduleId,
+            Long moduleId,
             String title,
             String description,
             Integer orderIndex
@@ -46,7 +44,7 @@ public class CourseModuleService {
     }
 
     @Transactional(readOnly = true)
-    public CourseModule getModuleById(UUID moduleId) {
+    public CourseModule getModuleById(Long moduleId) {
         return courseModuleRepository.findById(moduleId)
                 .orElseThrow(() ->
                         new EntityNotFoundException("Course module not found")
@@ -54,13 +52,14 @@ public class CourseModuleService {
     }
 
     @Transactional(readOnly = true)
-    public List<CourseModule> getModulesByCourseId(UUID courseId) {
+    public List<CourseModule> getModulesByCourseId(Long courseId) {
         return courseModuleRepository.findAllByCourseIdOrderByOrderIndex(courseId);
     }
 
     @Transactional
-    public void deleteModule(UUID moduleId) {
+    public void deleteModule(Long moduleId) {
         CourseModule module = getModuleById(moduleId);
         courseModuleRepository.delete(module);
     }
+
 }

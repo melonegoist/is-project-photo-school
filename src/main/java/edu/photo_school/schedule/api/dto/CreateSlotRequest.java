@@ -5,11 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public record CreateSlotRequest(
         @NotNull
-        UUID teacherId,
+        Long teacherId,
 
         @NotNull
         @Future(message = "Start time must be in the future")
@@ -19,7 +18,7 @@ public record CreateSlotRequest(
         @Future(message = "End time must be in the future")
         LocalDateTime endTime,
 
-        UUID lessonId,
+        Long lessonId,
 
         @Positive
         Integer maxStudents,

@@ -1,18 +1,23 @@
 package edu.photo_school.course.domain;
 
 import java.time.Instant;
-import java.util.UUID;
 
 public abstract class DomainEvent {
-    private final UUID eventId;
+    private final Long eventId;
     private final Instant occurredOn;
 
     protected DomainEvent() {
-        this.eventId = UUID.randomUUID();
+        this.eventId = (long) (Math.random() * 1000000000);
         this.occurredOn = Instant.now();
     }
 
-    public UUID getEventId() { return eventId; }
-    public Instant getOccurredOn() { return occurredOn; }
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public Instant getOccurredOn() {
+        return occurredOn;
+    }
+
     public abstract String getEventType();
 }

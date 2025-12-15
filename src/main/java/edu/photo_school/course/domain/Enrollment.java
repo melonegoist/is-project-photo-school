@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(
@@ -29,13 +28,13 @@ public class Enrollment {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(name = "course_id", nullable = false)
-    private UUID courseId;
+    private Long courseId;
 
     @Column(name = "student_id", nullable = false)
-    private UUID studentId;
+    private Long studentId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -53,7 +52,7 @@ public class Enrollment {
     /* =====================
        Factory method
        ===================== */
-    public static Enrollment create(UUID courseId, UUID studentId) {
+    public static Enrollment create(Long courseId, Long studentId) {
         if (courseId == null || studentId == null) {
             throw new IllegalArgumentException("CourseId and StudentId must not be null");
         }
@@ -68,7 +67,7 @@ public class Enrollment {
 
         // Публикуем событие
         enrollment.registerEvent(new EnrollmentCreatedEvent(
-                enrollment.getId(), // пока null, будет установлен после сохранения
+                enrollment.getId(),
                 courseId,
                 studentId
         ));
@@ -119,10 +118,28 @@ public class Enrollment {
         return this.status == EnrollmentStatus.CANCELLED;
     }
 
-    public UUID getId() { return id; }
-    public UUID getCourseId() { return courseId; }
-    public UUID getStudentId() { return studentId; }
-    public EnrollmentStatus getStatus() { return status; }
-    public Instant getCreatedAt() { return createdAt; }
-    public Instant getUpdatedAt() { return updatedAt; }
+    public Long getId() {
+        return id;
+    }
+
+    public Long getCourseId() {
+        return courseId;
+    }
+
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public EnrollmentStatus getStatus() {
+        return status;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
 }

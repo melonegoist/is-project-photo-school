@@ -1,5 +1,6 @@
 package edu.photo_school.auth.security;
 
+import edu.photo_school.user.domain.Role;
 import edu.photo_school.user.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +21,7 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<String> roleNames = user.getRoles().stream()
-                .map(role -> role.getName())
+                .map(Role::getName)
                 .collect(Collectors.toSet());
         return roleNames.stream()
                 .map(SimpleGrantedAuthority::new)

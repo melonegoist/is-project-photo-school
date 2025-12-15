@@ -3,12 +3,10 @@ package edu.photo_school.course.api.dto;
 import edu.photo_school.course.domain.Enrollment;
 import edu.photo_school.course.domain.enums.EnrollmentStatus;
 
-import java.util.UUID;
-
 public record EnrollmentResponse(
-        UUID id,
-        UUID courseId,
-        UUID studentId,
+        Long id,
+        Long courseId,
+        Long studentId,
         EnrollmentStatus status
 ) {
     public static EnrollmentResponse from(Enrollment enrollment) {
@@ -19,4 +17,5 @@ public record EnrollmentResponse(
                 enrollment.getStatus()
         );
     }
+
 }

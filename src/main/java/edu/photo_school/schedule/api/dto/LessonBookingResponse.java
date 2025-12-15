@@ -4,12 +4,11 @@ import edu.photo_school.schedule.domain.LessonBooking;
 import edu.photo_school.schedule.domain.enums.BookingStatus;
 
 import java.time.Instant;
-import java.util.UUID;
 
 public record LessonBookingResponse(
-        UUID id,
-        UUID slotId,
-        UUID studentId,
+        Long id,
+        Long slotId,
+        Long studentId,
         BookingStatus status,
         Instant createdAt
 ) {

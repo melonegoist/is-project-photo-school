@@ -1,17 +1,15 @@
 package edu.photo_school.course.api.dto;
 
 import edu.photo_school.course.domain.CourseModule;
-import edu.photo_school.course.domain.Lesson;
 
 import java.util.List;
-import java.util.UUID;
 
 public record CourseModuleResponse(
-        UUID id,
+        Long id,
         String title,
         String description,
         Integer orderIndex,
-        UUID courseId,
+        Long courseId,
         List<LessonResponse> lessons
 ) {
     public static CourseModuleResponse from(CourseModule module) {
@@ -26,4 +24,5 @@ public record CourseModuleResponse(
                         .toList()
         );
     }
+
 }

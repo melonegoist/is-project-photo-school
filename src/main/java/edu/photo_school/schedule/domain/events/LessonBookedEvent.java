@@ -2,14 +2,12 @@ package edu.photo_school.schedule.domain.events;
 
 import edu.photo_school.course.domain.DomainEvent;
 
-import java.util.UUID;
-
 public class LessonBookedEvent extends DomainEvent {
-    private final UUID bookingId;
-    private final UUID slotId;
-    private final UUID studentId;
+    private final Long bookingId;
+    private final Long slotId;
+    private final Long studentId;
 
-    public LessonBookedEvent(UUID bookingId, UUID slotId, UUID studentId) {
+    public LessonBookedEvent(Long bookingId, Long slotId, Long studentId) {
         this.bookingId = bookingId;
         this.slotId = slotId;
         this.studentId = studentId;
@@ -20,7 +18,15 @@ public class LessonBookedEvent extends DomainEvent {
         return "schedule.lesson.booked";
     }
 
-    public UUID getBookingId() { return bookingId; }
-    public UUID getSlotId() { return slotId; }
-    public UUID getStudentId() { return studentId; }
+    public Long getBookingId() {
+        return bookingId;
+    }
+
+    public Long getSlotId() {
+        return slotId;
+    }
+
+    public Long getStudentId() {
+        return studentId;
+    }
 }

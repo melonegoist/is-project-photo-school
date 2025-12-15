@@ -3,15 +3,12 @@ package edu.photo_school.course.api;
 import edu.photo_school.course.api.dto.CourseResponse;
 import edu.photo_school.course.api.dto.CreateCourseRequest;
 import edu.photo_school.course.application.CourseService;
-import edu.photo_school.course.application.EnrollmentService;
 import edu.photo_school.course.domain.Course;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/courses")
@@ -44,7 +41,7 @@ public class CourseController {
     }
 
     @GetMapping("/teacher/{teacherId}")
-    public List<CourseResponse> getCoursesForTeacher(@PathVariable UUID teacherId) {
+    public List<CourseResponse> getCoursesForTeacher(@PathVariable Long teacherId) {
         return courseService.getCoursesForTeacher(teacherId)
                 .stream()
                 .map(CourseResponse::from)
@@ -52,17 +49,17 @@ public class CourseController {
     }
 
     @PatchMapping("/{courseId}/publish")
-    public CourseResponse publishCourse(@PathVariable UUID courseId) {
+    public CourseResponse publishCourse(@PathVariable Long courseId) {
         return CourseResponse.from(courseService.publishCourse(courseId));
     }
 
     @PatchMapping("/{courseId}/unpublish")
-    public CourseResponse unpublishCourse(@PathVariable UUID courseId) {
+    public CourseResponse unpublishCourse(@PathVariable Long courseId) {
         return CourseResponse.from(courseService.unpublishCourse(courseId));
     }
 
     @GetMapping("/{courseId}")
-    public CourseResponse getCourse(@PathVariable UUID courseId) {
+    public CourseResponse getCourse(@PathVariable Long courseId) {
         return CourseResponse.from(courseService.getCourseById(courseId));
     }
 }

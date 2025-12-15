@@ -5,17 +5,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-public interface LessonBookingRepository extends JpaRepository<LessonBooking, UUID> {
+public interface LessonBookingRepository extends JpaRepository<LessonBooking, Long> {
 
-    boolean existsBySlotIdAndStudentId(UUID slotId, UUID studentId);
+    boolean existsBySlotIdAndStudentId(Long slotId, Long studentId);
 
-    Optional<LessonBooking> findBySlotIdAndStudentId(UUID slotId, UUID studentId);
+    Optional<LessonBooking> findBySlotIdAndStudentId(Long slotId, Long studentId);
 
-    List<LessonBooking> findByStudentId(UUID studentId);
+    List<LessonBooking> findByStudentId(Long studentId);
 
-    List<LessonBooking> findBySlotId(UUID slotId);
+    List<LessonBooking> findBySlotId(Long slotId);
 
-    long countBySlotId(UUID slotId);
+    long countBySlotId(Long slotId);
+
 }

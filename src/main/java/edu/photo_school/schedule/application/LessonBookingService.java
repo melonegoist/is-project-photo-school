@@ -5,8 +5,6 @@ import edu.photo_school.schedule.domain.ScheduleSlot;
 import edu.photo_school.schedule.infrastructure.repository.LessonBookingRepository;
 import edu.photo_school.schedule.infrastructure.repository.ScheduleSlotRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
@@ -14,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
-@Slf4j
 @Service
 public class LessonBookingService {
 
@@ -33,7 +29,7 @@ public class LessonBookingService {
     private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
-    public LessonBooking bookSlot(UUID slotId, UUID studentId) {
+    public LessonBooking bookSlot(Long slotId, Long studentId) {
         // Проверяем существование слота
         ScheduleSlot slot = scheduleSlotRepository.findById(slotId)
                 .orElseThrow(() -> new EntityNotFoundException("Schedule slot not found"));
@@ -73,7 +69,7 @@ public class LessonBookingService {
     }
 
     @Transactional
-    public void cancelBooking(UUID bookingId, UUID studentId) {
+    public void cancelBooking(Long bookingId, Long studentId) {
         LessonBooking booking = lessonBookingRepository.findById(bookingId)
                 .orElseThrow(() -> new EntityNotFoundException("Booking not found"));
 
@@ -95,24 +91,24 @@ public class LessonBookingService {
     }
 
     @Transactional(readOnly = true)
-    public LessonBooking getBooking(UUID bookingId) {
+    public LessonBooking getBooking(Long bookingId) {
         return lessonBookingRepository.findById(bookingId)
                 .orElseThrow(() -> new EntityNotFoundException("Booking not found"));
     }
 
     @Transactional(readOnly = true)
-    public LessonBooking getBookingBySlotAndStudent(UUID slotId, UUID studentId) {
+    public LessonBooking getBookingBySlotAndStudent(Long slotId, Long studentId) {
         return lessonBookingRepository.findBySlotIdAndStudentId(slotId, studentId)
                 .orElseThrow(() -> new EntityNotFoundException("Booking not found"));
     }
 
     @Transactional(readOnly = true)
-    public List<LessonBooking> getStudentBookings(UUID studentId) {
+    public List<LessonBooking> getStudentBookings(Long studentId) {
         return lessonBookingRepository.findByStudentId(studentId);
     }
 
     @Transactional(readOnly = true)
-    public List<LessonBooking> getSlotBookings(UUID slotId) {
+    public List<LessonBooking> getSlotBookings(Long slotId) {
         return lessonBookingRepository.findBySlotId(slotId);
     }
 }

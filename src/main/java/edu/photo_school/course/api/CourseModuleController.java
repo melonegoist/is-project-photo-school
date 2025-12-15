@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/courses/{courseId}/modules")
@@ -25,7 +24,7 @@ public class CourseModuleController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CourseModuleResponse createModule(
-            @PathVariable UUID courseId,
+            @PathVariable Long courseId,
             @RequestBody @Valid CreateModuleRequest request
     ) {
         CourseModule module = courseModuleService.createModule(
@@ -38,7 +37,7 @@ public class CourseModuleController {
     }
 
     @GetMapping
-    public List<CourseModuleResponse> getModules(@PathVariable UUID courseId) {
+    public List<CourseModuleResponse> getModules(@PathVariable Long courseId) {
         return courseModuleService.getModulesByCourseId(courseId)
                 .stream()
                 .map(CourseModuleResponse::from)
@@ -47,8 +46,8 @@ public class CourseModuleController {
 
     @GetMapping("/{moduleId}")
     public CourseModuleResponse getModule(
-            @PathVariable UUID courseId,
-            @PathVariable UUID moduleId
+            @PathVariable Long courseId,
+            @PathVariable Long moduleId
     ) {
         return CourseModuleResponse.from(
                 courseModuleService.getModuleById(moduleId)
@@ -57,8 +56,8 @@ public class CourseModuleController {
 
     @PutMapping("/{moduleId}")
     public CourseModuleResponse updateModule(
-            @PathVariable UUID courseId,
-            @PathVariable UUID moduleId,
+            @PathVariable Long courseId,
+            @PathVariable Long moduleId,
             @RequestBody @Valid CreateModuleRequest request
     ) {
         CourseModule module = courseModuleService.updateModule(
@@ -73,8 +72,8 @@ public class CourseModuleController {
     @DeleteMapping("/{moduleId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteModule(
-            @PathVariable UUID courseId,
-            @PathVariable UUID moduleId
+            @PathVariable Long courseId,
+            @PathVariable Long moduleId
     ) {
         courseModuleService.deleteModule(moduleId);
     }

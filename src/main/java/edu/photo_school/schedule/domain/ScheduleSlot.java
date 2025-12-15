@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "schedule_slots")
@@ -18,10 +17,10 @@ public class ScheduleSlot {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(name = "teacher_id", nullable = false)
-    private UUID teacherId;
+    private Long teacherId;
 
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
@@ -34,7 +33,7 @@ public class ScheduleSlot {
     private SlotStatus status = SlotStatus.AVAILABLE;
 
     @Column(name = "lesson_id")
-    private UUID lessonId;
+    private Long lessonId;
 
     @Column(name = "max_students")
     private Integer maxStudents = 1;
@@ -58,10 +57,10 @@ public class ScheduleSlot {
     private Instant updatedAt;
 
     public static ScheduleSlot create(
-            UUID teacherId,
+            Long teacherId,
             LocalDateTime startTime,
             LocalDateTime endTime,
-            UUID lessonId,
+            Long lessonId,
             Integer maxStudents,
             Double priceAmount,
             String priceCurrency,
@@ -167,11 +166,11 @@ public class ScheduleSlot {
         return maxStudents;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public UUID getTeacherId() {
+    public Long getTeacherId() {
         return teacherId;
     }
 
@@ -187,7 +186,7 @@ public class ScheduleSlot {
         return status;
     }
 
-    public UUID getLessonId() {
+    public Long getLessonId() {
         return lessonId;
     }
 }

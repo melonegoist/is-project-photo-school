@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "lesson_bookings", uniqueConstraints = {
@@ -23,13 +22,13 @@ public class LessonBooking {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(name = "slot_id", nullable = false)
-    private UUID slotId;
+    private Long slotId;
 
     @Column(name = "student_id", nullable = false)
-    private UUID studentId;
+    private Long studentId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -44,7 +43,7 @@ public class LessonBooking {
     @Transient
     private List<DomainEvent> domainEvents = new ArrayList<>();
 
-    public static LessonBooking create(UUID slotId, UUID studentId) {
+    public static LessonBooking create(Long slotId, Long studentId) {
         LessonBooking booking = new LessonBooking();
         booking.slotId = slotId;
         booking.studentId = studentId;
@@ -106,15 +105,15 @@ public class LessonBooking {
     }
 
     // Явные геттеры для полей
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public UUID getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public UUID getSlotId() {
+    public Long getSlotId() {
         return slotId;
     }
 

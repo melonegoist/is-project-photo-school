@@ -4,12 +4,10 @@ import edu.photo_school.course.domain.CourseModule;
 import edu.photo_school.course.domain.Lesson;
 import edu.photo_school.course.infrastructure.repository.LessonRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class LessonService {
@@ -24,7 +22,7 @@ public class LessonService {
 
     @Transactional
     public Lesson createLesson(
-            UUID moduleId,
+            Long moduleId,
             String title,
             String description,
             Integer orderIndex,
@@ -47,7 +45,7 @@ public class LessonService {
 
     @Transactional
     public Lesson updateLesson(
-            UUID lessonId,
+            Long lessonId,
             String title,
             String description,
             String videoUrl,
@@ -62,7 +60,7 @@ public class LessonService {
     }
 
     @Transactional(readOnly = true)
-    public Lesson getLessonById(UUID lessonId) {
+    public Lesson getLessonById(Long lessonId) {
         return lessonRepository.findById(lessonId)
                 .orElseThrow(() ->
                         new EntityNotFoundException("Lesson not found")
@@ -70,18 +68,19 @@ public class LessonService {
     }
 
     @Transactional(readOnly = true)
-    public List<Lesson> getLessonsByModuleId(UUID moduleId) {
+    public List<Lesson> getLessonsByModuleId(Long moduleId) {
         return lessonRepository.findAllByModuleIdOrderByOrderIndex(moduleId);
     }
 
     @Transactional(readOnly = true)
-    public List<Lesson> getPreviewLessonsByCourseId(UUID courseId) {
+    public List<Lesson> getPreviewLessonsByCourseId(Long courseId) {
         return lessonRepository.findByModuleCourseIdAndIsPreviewTrue(courseId);
     }
 
     @Transactional
-    public void deleteLesson(UUID lessonId) {
+    public void deleteLesson(Long lessonId) {
         Lesson lesson = getLessonById(lessonId);
         lessonRepository.delete(lesson);
     }
+
 }

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "course_modules")
@@ -18,7 +17,7 @@ public class CourseModule {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -42,10 +41,6 @@ public class CourseModule {
 
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
-
-    /* =====================
-       Factory method
-       ===================== */
 
     public static CourseModule create(Course course, String title, String description, Integer orderIndex) {
         if (title == null || title.isBlank()) {
@@ -94,12 +89,36 @@ public class CourseModule {
     }
 
     // Getters
-    public UUID getId() { return id; }
-    public String getTitle() { return title; }
-    public String getDescription() { return description; }
-    public Integer getOrderIndex() { return orderIndex; }
-    public Course getCourse() { return course; }
-    public List<Lesson> getLessons() { return lessons; }
-    public Instant getCreatedAt() { return createdAt; }
-    public Instant getUpdatedAt() { return updatedAt; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getOrderIndex() {
+        return orderIndex;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
 }

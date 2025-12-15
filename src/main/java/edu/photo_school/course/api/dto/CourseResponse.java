@@ -4,15 +4,14 @@ import edu.photo_school.course.domain.Course;
 import edu.photo_school.course.domain.enums.CourseFormat;
 
 import java.util.List;
-import java.util.UUID;
 
 public record CourseResponse(
-        UUID id,
+        Long id,
         String title,
         String description,
         CourseFormat format,
         boolean published,
-        UUID teacherId,
+        Long teacherId,
         List<CourseModuleResponse> modules
 ) {
     public static CourseResponse from(Course course) {
